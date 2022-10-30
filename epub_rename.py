@@ -22,7 +22,10 @@ for filename in os.listdir(filepath):
             creator = "未知"
         else:
             creator = creator[0][0]
-        raw_name = title.strip() + '-' + creator.strip()
-        new_name = re.sub("\s|:|》|《|，|。|！|、|：|、|”|“", "", raw_name) + '.epub'
+        raw_name = title.strip() + ' - ' + creator.strip()
+        new_name = re.sub(":|：",
+               "—", raw_name)
+        new_name = re.sub(r"（.+）|\(.+\)|《.+》|【.+】|\[.+\]|“.+”|、",
+               "", new_name) + '.epub'
         if (not os.path.exists(filepath + new_name)):
             os.rename(file, filepath + new_name)
